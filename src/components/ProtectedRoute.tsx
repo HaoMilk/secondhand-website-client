@@ -1,0 +1,23 @@
+import { Navigate } from 'react-router-dom'
+import type { UserRole } from '../models/Auth'
+
+interface ProtectedRouteProps {
+  children: React.ReactNode
+  allowedRoles?: UserRole[]
+}
+
+export const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) => {
+  const token = localStorage.getItem('token')
+  const role = localStorage.getItem('role') as UserRole | null
+
+  if (!token) {
+    return <Navigate to="/login" replace />
+  }
+
+  if (allowedRoles && role && !allowedRoles.includes(role)) {
+    return <Navigate to="/login" replace />
+  }
+
+  return <>{children}</>
+}
+

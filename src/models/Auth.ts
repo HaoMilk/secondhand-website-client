@@ -11,11 +11,14 @@ export interface RegisterCredentials {
   confirmPassword: string
 }
 
+export type UserRole = 'admin' | 'user' | 'seller'
+
 export interface AuthResponse {
   token?: string
   accessToken?: string
   id?: string
   email?: string
+  role?: UserRole
   user?: User
   message?: string
   code?: string
