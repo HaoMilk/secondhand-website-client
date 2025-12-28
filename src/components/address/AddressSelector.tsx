@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { profileApi } from '../services/api'
-import type { ShippingAddress } from '../models/Profile'
+import { profileApi } from '../../services/api'
+import type { ShippingAddress } from '../../models/Profile'
 import './AddressSelector.css'
 
 interface AddressSelectorProps {

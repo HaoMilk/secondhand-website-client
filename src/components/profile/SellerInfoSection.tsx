@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom'
 import './ProfileSection.css'
 import './SellerInfoSection.css'
-import AddressSelector from './AddressSelector'
-import ProvinceSelector from './ProvinceSelector'
-import type { SellerInfo, ShippingAddress } from '../models/Profile'
+import AddressSelector from '../address/AddressSelector'
+import ProvinceSelector from '../address/ProvinceSelector'
+import type { SellerInfo, ShippingAddress } from '../../models/Profile'
 
 interface SellerInfoSectionProps {
   sellerInfo: SellerInfo

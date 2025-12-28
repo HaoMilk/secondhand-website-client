@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { useVietnamAddress } from '../hooks/useVietnamAddress'
-import { vietnamAddressApi } from '../services/address.api'
+import { useVietnamAddress } from '../../hooks/useVietnamAddress'
+import { vietnamAddressApi } from '../../services/address.api'
 import './ProfileSection.css'
 
 interface ProfileBasicInfoProps {

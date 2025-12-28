@@ -9,6 +9,7 @@ import type {
   SellerInfo,
   ProfileCheckResult 
 } from '../models/Profile'
+import type { CartResponse, AddToCartInput, UpdateCartItemInput } from '../models/Cart'
 
 const api = axios.create({
   baseURL: '/api',
@@ -106,6 +107,11 @@ export const productApi = {
     })
     return response.data
   },
+
+  getById: async (id: string): Promise<Product> => {
+    const response = await api.get<Product>(`/v1/products/${id}`)
+    return response.data
+  },
 }
 
 export const categoryApi = {
@@ -174,6 +180,33 @@ export const profileApi = {
 
   checkCanBuy: async (): Promise<ProfileCheckResult> => {
     const response = await api.get<ProfileCheckResult>('/v1/profile/check-buy')
+    return response.data
+  },
+}
+
+export const cartApi = {
+  getCart: async (): Promise<CartResponse> => {
+    const response = await api.get<CartResponse>('/v1/cart')
+    return response.data
+  },
+
+  addItem: async (data: AddToCartInput): Promise<CartResponse> => {
+    const response = await api.post<CartResponse>('/v1/cart/items', data)
+    return response.data
+  },
+
+  updateItem: async (productId: string, data: UpdateCartItemInput): Promise<CartResponse> => {
+    const response = await api.put<CartResponse>(`/v1/cart/items/${productId}`, data)
+    return response.data
+  },
+
+  removeItem: async (productId: string): Promise<CartResponse> => {
+    const response = await api.delete<CartResponse>(`/v1/cart/items/${productId}`)
+    return response.data
+  },
+
+  clearCart: async (): Promise<CartResponse> => {
+    const response = await api.delete<CartResponse>('/v1/cart')
     return response.data
   },
 }

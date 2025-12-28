@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { vietnamAddressApi, type Province } from '../services/address.api'
+import { vietnamAddressApi, type Province } from '../../services/address.api'
 import './ProvinceSelector.css'
 
 interface ProvinceSelectorProps {

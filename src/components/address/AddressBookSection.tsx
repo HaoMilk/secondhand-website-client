@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import './ProfileSection.css'
+import '../profile/ProfileSection.css'
 import './AddressBookSection.css'
 import AddressDropdown from './AddressDropdown'
-import { vietnamAddressApi } from '../services/address.api'
-import type { ShippingAddress } from '../models/Profile'
+import { vietnamAddressApi } from '../../services/address.api'
+import type { ShippingAddress } from '../../models/Profile'
 
 interface AddressBookSectionProps {
   addresses: ShippingAddress[]
