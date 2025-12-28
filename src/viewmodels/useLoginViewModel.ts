@@ -58,11 +58,20 @@ export const useLoginViewModel = (): LoginViewModel => {
     try {
       const response = await authApi.login(credentials)
       
-      // Backend trả về { accessToken } khi đăng nhập thành công
+      // Backend trả về { accessToken, role, email } khi đăng nhập thành công
       const token = response.accessToken || response.token
       if (token) {
         localStorage.setItem('token', token)
-        navigate('/home')
+        localStorage.setItem('role', response.role || 'user')
+        localStorage.setItem('email', response.email || email)
+        
+        // Redirect theo role
+        const role = response.role || 'user'
+        if (role === 'admin') {
+          navigate('/admin')
+        } else {
+          navigate('/user')
+        }
       } else {
         setError(response.message || 'Đăng nhập thất bại')
       }

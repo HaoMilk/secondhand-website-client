@@ -1,0 +1,24 @@
+/* SellerInfoSection - Chỉ style các phần đặc biệt */
+/* Các style chung đã được định nghĩa trong ProfileSection.css */
+
+.agreements-section {
+  background-color: #FAFAF8;
+  padding: 20px;
+  border-radius: 8px;
+  border: 2px solid #E6D5B8;
+}
+
+.agreement-item {
+  margin-bottom: 16px;
+}
+
+.agreement-item:last-child {
+  margin-bottom: 0;
+}
+
+.agreement-item span {
+  color: #5D4037;
+  font-size: 14px;
+  line-height: 1.5;
+}
+

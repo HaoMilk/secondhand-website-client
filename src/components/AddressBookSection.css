@@ -1,0 +1,442 @@
+.addresses-list {
+  margin-bottom: 32px;
+}
+
+.address-card {
+  border: 2px solid #E6D5B8;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  position: relative;
+  transition: all 0.2s;
+  background: #FAFAF8;
+}
+
+.address-card:hover {
+  box-shadow: 0 4px 12px rgba(91, 64, 55, 0.15);
+  transform: translateY(-2px);
+}
+
+.address-card.default {
+  border-color: #8B4513;
+  background-color: #FFF8F0;
+}
+
+.address-badges {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-end;
+}
+
+.default-badge {
+  background: linear-gradient(135deg, #8B4513 0%, #6F4E37 100%);
+  color: #FFFFFF;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(139, 69, 19, 0.3);
+}
+
+.shipping-badge {
+  background: linear-gradient(135deg, #8B4513 0%, #6F4E37 100%);
+}
+
+.pickup-badge {
+  background: linear-gradient(135deg, #5D4037 0%, #3E2723 100%);
+}
+
+.address-info {
+  margin-bottom: 16px;
+  padding-right: 120px;
+}
+
+.address-name {
+  font-weight: 600;
+  font-size: 16px;
+  color: #5D4037;
+  margin-bottom: 6px;
+}
+
+.address-phone {
+  color: #8B6F47;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.address-details {
+  color: #5D4037;
+  line-height: 1.6;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.address-note {
+  color: #A0826D;
+  font-size: 13px;
+  font-style: italic;
+  margin-top: 8px;
+}
+
+.address-usage-options {
+  margin-bottom: 16px;
+  padding: 12px;
+  background: #FFFFFF;
+  border-radius: 8px;
+  border: 1px solid #E6D5B8;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.address-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.address-select-info {
+  margin-top: 12px;
+  padding: 12px;
+  background-color: #E8F5E9;
+  border-radius: 8px;
+  border: 1px solid #A5D6A7;
+}
+
+.select-info-text {
+  margin: 0;
+  color: #2E7D32;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.edit-button,
+.delete-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.edit-button {
+  background: #FFFFFF;
+  color: #5D4037;
+  border: 2px solid #E6D5B8;
+}
+
+.edit-button:hover:not(:disabled) {
+  background: #FAFAF8;
+  border-color: #8B4513;
+}
+
+.delete-button {
+  background: #FFFFFF;
+  color: #D32F2F;
+  border: 2px solid #FFCDD2;
+}
+
+.delete-button:hover:not(:disabled) {
+  background: #FFEBEE;
+  border-color: #D32F2F;
+}
+
+.edit-button:disabled,
+.delete-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.address-edit-form {
+  margin-top: 12px;
+  padding: 16px;
+  background: #FFFFFF;
+  border-radius: 8px;
+  border: 1px solid #E6D5B8;
+}
+
+.address-edit-form .form-group {
+  margin-bottom: 16px;
+}
+
+.address-edit-form .form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #5D4037;
+  margin-bottom: 8px;
+}
+
+.address-edit-form .form-group input,
+.address-edit-form .form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #E6D5B8;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.2s;
+  outline: none;
+  background-color: #FFFFFF;
+  color: #5D4037;
+  font-family: inherit;
+}
+
+.address-edit-form .form-group input:focus,
+.address-edit-form .form-group textarea:focus {
+  border-color: #8B4513;
+  box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+}
+
+.address-edit-form .form-group input:disabled,
+.address-edit-form .form-group textarea:disabled {
+  background-color: #F5F5F0;
+  cursor: not-allowed;
+  border-color: #E6D5B8;
+}
+
+.address-edit-form .form-group input::placeholder,
+.address-edit-form .form-group textarea::placeholder {
+  color: #A0826D;
+}
+
+.address-edit-form .form-group textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.address-edit-form .form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.address-edit-form .form-group-inline {
+  display: flex;
+  flex-direction: column;
+}
+
+.address-edit-form .form-group-inline label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #5D4037;
+  margin-bottom: 8px;
+}
+
+.address-edit-form .form-group-inline input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #E6D5B8;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.2s;
+  outline: none;
+  background-color: #FFFFFF;
+  color: #5D4037;
+  font-family: inherit;
+}
+
+.address-edit-form .form-group-inline input:focus {
+  border-color: #8B4513;
+  box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+}
+
+.address-edit-form .form-group-inline input:disabled {
+  background-color: #F5F5F0;
+  cursor: not-allowed;
+  border-color: #E6D5B8;
+}
+
+.address-edit-form .form-group-inline input::placeholder {
+  color: #A0826D;
+}
+
+.add-address-section .form-group {
+  margin-bottom: 20px;
+}
+
+.add-address-section .form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #5D4037;
+  margin-bottom: 8px;
+}
+
+.add-address-section .form-group input,
+.add-address-section .form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #E6D5B8;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.2s;
+  outline: none;
+  background-color: #FFFFFF;
+  color: #5D4037;
+  font-family: inherit;
+}
+
+.add-address-section .form-group input:focus,
+.add-address-section .form-group textarea:focus {
+  border-color: #8B4513;
+  box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+}
+
+.add-address-section .form-group input:disabled,
+.add-address-section .form-group textarea:disabled {
+  background-color: #F5F5F0;
+  cursor: not-allowed;
+  border-color: #E6D5B8;
+}
+
+.add-address-section .form-group input::placeholder,
+.add-address-section .form-group textarea::placeholder {
+  color: #A0826D;
+}
+
+.add-address-section .form-group textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.add-address-section .form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.add-address-section .form-group-inline {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-address-section .form-group-inline label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #5D4037;
+  margin-bottom: 8px;
+}
+
+.add-address-section .form-group-inline input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #E6D5B8;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.2s;
+  outline: none;
+  background-color: #FFFFFF;
+  color: #5D4037;
+  font-family: inherit;
+}
+
+.add-address-section .form-group-inline input:focus {
+  border-color: #8B4513;
+  box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+}
+
+.add-address-section .form-group-inline input:disabled {
+  background-color: #F5F5F0;
+  cursor: not-allowed;
+  border-color: #E6D5B8;
+}
+
+.add-address-section .form-group-inline input::placeholder {
+  color: #A0826D;
+}
+
+.add-address-section .required {
+  color: #D32F2F;
+}
+
+.add-address-section {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 2px solid #E6D5B8;
+}
+
+.add-address-section h3 {
+  margin: 0 0 20px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #5D4037;
+}
+
+.add-button {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #8B4513 0%, #6F4E37 100%);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.add-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(139, 69, 19, 0.4);
+  background: linear-gradient(135deg, #A0522D 0%, #8B4513 100%);
+}
+
+.add-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Các style checkbox-label và checkbox-group đã được định nghĩa trong ProfileSection.css */
+
+.cancel-button {
+  padding: 8px 16px;
+  background: #FFFFFF;
+  color: #5D4037;
+  border: 2px solid #E6D5B8;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancel-button:hover:not(:disabled) {
+  background: #FAFAF8;
+  border-color: #8B4513;
+}
+
+.save-button {
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #8B4513 0%, #6F4E37 100%);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.save-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(139, 69, 19, 0.3);
+  background: linear-gradient(135deg, #A0522D 0%, #8B4513 100%);
+}
+
+.save-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
