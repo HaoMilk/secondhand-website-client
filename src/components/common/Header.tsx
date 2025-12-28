@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import type { UserRole } from '../models/Auth'
-import { categoryApi } from '../services/api'
-import type { Category } from '../models/Category'
+import type { UserRole } from '../../models/Auth'
+import { categoryApi, cartApi } from '../../services/api'
+import type { Category } from '../../models/Category'
 import './Header.css'
 
 const Header = () => {
@@ -13,7 +13,7 @@ const Header = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [categories, setCategories] = useState<Category[]>([])
-  const [cartCount] = useState(0)
+  const [cartCount, setCartCount] = useState(0)
   
   const token = localStorage.getItem('token')
   const role = localStorage.getItem('role') as UserRole | null
@@ -41,6 +41,24 @@ const Header = () => {
     }
     fetchCategories()
   }, [])
+
+  // Fetch cart count on mount and when token changes
+  useEffect(() => {
+    const fetchCartCount = async () => {
+      if (token && role === 'user') {
+        try {
+          const cart = await cartApi.getCart()
+          setCartCount(cart.totalItems)
+        } catch (error) {
+          // Ignore errors (user might not have cart yet)
+          setCartCount(0)
+        }
+      } else {
+        setCartCount(0)
+      }
+    }
+    fetchCartCount()
+  }, [token, role])
 
   // Close dropdowns when clicking outside
   useEffect(() => {
@@ -330,10 +348,10 @@ const Header = () => {
                   <div className="user-avatar-mobile">
                     {email.charAt(0).toUpperCase()}
                   </div>
-                    <div>
-                      <div className="user-email-mobile">{email}</div>
-                      <div className="user-role-mobile">{role === 'admin' ? 'Quản trị viên' : 'Người dùng'}</div>
-                    </div>
+                  <div>
+                    <div className="user-email-mobile">{email}</div>
+                    <div className="user-role-mobile">{role === 'admin' ? 'Quản trị viên' : 'Người dùng'}</div>
+                  </div>
                 </div>
                 <div className="mobile-menu-divider"></div>
                 {getUserMenuItems().map((item, index) => (
@@ -389,3 +407,4 @@ const Header = () => {
 }
 
 export default Header
+

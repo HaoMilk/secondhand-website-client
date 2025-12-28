@@ -73,7 +73,12 @@ const MyProductsPage = () => {
           <div className="products-grid">
             {state.products.map((product) => {
               return (
-                <div key={product.id} className="product-card">
+                <div 
+                  key={product.id} 
+                  className="product-card"
+                  onClick={() => navigate(`/products/${product.id}`)}
+                  style={{ cursor: 'pointer' }}
+                >
                   <div className="product-image">
                     {product.images && product.images.length > 0 ? (
                       <img src={product.images[0]} alt={product.title} />
@@ -101,7 +106,8 @@ const MyProductsPage = () => {
                     <div className="product-actions">
                       <button
                         className="action-btn edit-btn"
-                        onClick={() => {
+                        onClick={(e) => {
+                          e.stopPropagation()
                           // TODO: Navigate to edit page
                           alert('Chức năng chỉnh sửa đang được phát triển')
                         }}
@@ -110,9 +116,9 @@ const MyProductsPage = () => {
                       </button>
                       <button
                         className="action-btn view-btn"
-                        onClick={() => {
-                          // TODO: Navigate to product detail
-                          alert('Chức năng xem chi tiết đang được phát triển')
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          navigate(`/products/${product.id}`)
                         }}
                       >
                         Xem chi tiết

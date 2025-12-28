@@ -1,0 +1,52 @@
+.province-selector {
+  width: 100%;
+}
+
+.province-selector label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #333;
+  font-size: 14px;
+}
+
+.province-selector .province-select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #fff;
+  transition: border-color 0.2s;
+}
+
+.province-selector .province-select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.province-selector .province-select:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+  color: #999;
+}
+
+.province-selector .loading-text,
+.province-selector .error-text {
+  padding: 12px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.province-selector .error-text {
+  color: #dc3545;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+}
+
+.province-selector .loading-text {
+  color: #666;
+}
+

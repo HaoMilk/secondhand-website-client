@@ -1,7 +1,9 @@
-import { useState } from 'react'
-import './ProfileSection.css'
+import { useState, useEffect } from 'react'
+import '../profile/ProfileSection.css'
 import './AddressBookSection.css'
-import type { ShippingAddress } from '../models/Profile'
+import AddressDropdown from './AddressDropdown'
+import { vietnamAddressApi } from '../../services/address.api'
+import type { ShippingAddress } from '../../models/Profile'
 
 interface AddressBookSectionProps {
   addresses: ShippingAddress[]
@@ -30,10 +32,36 @@ const AddressBookSection = ({
   onSetDefaultPickup,
   onSetEditing
 }: AddressBookSectionProps) => {
-  const [editingAddress, setEditingAddress] = useState<Partial<ShippingAddress>>({})
+  const [editingAddress, setEditingAddress] = useState<Partial<ShippingAddress & { provinceCode?: string; districtCode?: string; wardCode?: string }>>({})
+  const [provinces, setProvinces] = useState<any[]>([])
 
-  const handleEdit = (address: ShippingAddress) => {
-    setEditingAddress({ ...address })
+  // Load provinces để tìm code từ name
+  useEffect(() => {
+    const loadProvinces = async () => {
+      try {
+        const data = await vietnamAddressApi.getProvinces()
+        setProvinces(data)
+      } catch (error) {
+        console.error('Error loading provinces:', error)
+      }
+    }
+    loadProvinces()
+  }, [])
+
+  const findProvinceCode = (name: string): string => {
+    const province = provinces.find(p => p.name === name)
+    return province?.code || ''
+  }
+
+  const handleEdit = async (address: ShippingAddress) => {
+    const editData: any = { ...address }
+    
+    // Nếu không có code nhưng có name, tìm code từ name
+    if (address.province && !(address as any).provinceCode && provinces.length > 0) {
+      editData.provinceCode = findProvinceCode(address.province)
+    }
+    
+    setEditingAddress(editData)
     onSetEditing(address._id || null)
   }
 
@@ -91,33 +119,35 @@ const AddressBookSection = ({
                     </div>
                   </div>
                   <div className="form-row">
-                    <div className="form-group-inline">
-                      <label>Tỉnh/Thành phố</label>
-                      <input
-                        type="text"
-                        value={editingAddress.province || ''}
-                        onChange={(e) => setEditingAddress({ ...editingAddress, province: e.target.value })}
-                        disabled={saving}
-                      />
-                    </div>
-                    <div className="form-group-inline">
-                      <label>Quận/Huyện</label>
-                      <input
-                        type="text"
-                        value={editingAddress.district || ''}
-                        onChange={(e) => setEditingAddress({ ...editingAddress, district: e.target.value })}
-                        disabled={saving}
-                      />
-                    </div>
-                    <div className="form-group-inline">
-                      <label>Phường/Xã</label>
-                      <input
-                        type="text"
-                        value={editingAddress.ward || ''}
-                        onChange={(e) => setEditingAddress({ ...editingAddress, ward: e.target.value })}
-                        disabled={saving}
-                      />
-                    </div>
+                    <AddressDropdown
+                      province={(editingAddress as any).provinceCode || (editingAddress.province && findProvinceCode(editingAddress.province))}
+                      district={(editingAddress as any).districtCode}
+                      ward={(editingAddress as any).wardCode}
+                      onProvinceChange={(code, name) => {
+                        setEditingAddress({ 
+                          ...editingAddress, 
+                          province: name,
+                          provinceCode: code 
+                        })
+                      }}
+                      onDistrictChange={(code, name) => {
+                        setEditingAddress({ 
+                          ...editingAddress, 
+                          district: name,
+                          districtCode: code 
+                        })
+                      }}
+                      onWardChange={(code, name) => {
+                        setEditingAddress({ 
+                          ...editingAddress, 
+                          ward: name,
+                          wardCode: code 
+                        })
+                      }}
+                      disabled={saving}
+                      required={false}
+                      showLabels={true}
+                    />
                   </div>
                   <div className="form-group">
                     <label>Số nhà, tên đường</label>
@@ -251,42 +281,26 @@ const AddressBookSection = ({
           </div>
         </div>
         <div className="form-row">
-          <div className="form-group-inline">
-            <label>
-              Tỉnh/Thành phố <span className="required">*</span>
-            </label>
-            <input
-              type="text"
-              value={newAddress.province || ''}
-              onChange={(e) => onNewAddressFieldChange('province', e.target.value)}
-              placeholder="VD: Hà Nội"
-              disabled={saving}
-            />
-          </div>
-          <div className="form-group-inline">
-            <label>
-              Quận/Huyện <span className="required">*</span>
-            </label>
-            <input
-              type="text"
-              value={newAddress.district || ''}
-              onChange={(e) => onNewAddressFieldChange('district', e.target.value)}
-              placeholder="VD: Cầu Giấy"
-              disabled={saving}
-            />
-          </div>
-          <div className="form-group-inline">
-            <label>
-              Phường/Xã <span className="required">*</span>
-            </label>
-            <input
-              type="text"
-              value={newAddress.ward || ''}
-              onChange={(e) => onNewAddressFieldChange('ward', e.target.value)}
-              placeholder="VD: Dịch Vọng"
-              disabled={saving}
-            />
-          </div>
+          <AddressDropdown
+            province={(newAddress as any).provinceCode}
+            district={(newAddress as any).districtCode}
+            ward={(newAddress as any).wardCode}
+            onProvinceChange={(code, name) => {
+              onNewAddressFieldChange('province', name)
+              onNewAddressFieldChange('provinceCode', code)
+            }}
+            onDistrictChange={(code, name) => {
+              onNewAddressFieldChange('district', name)
+              onNewAddressFieldChange('districtCode', code)
+            }}
+            onWardChange={(code, name) => {
+              onNewAddressFieldChange('ward', name)
+              onNewAddressFieldChange('wardCode', code)
+            }}
+            disabled={saving}
+            required={true}
+            showLabels={true}
+          />
         </div>
         <div className="form-group">
           <label>Số nhà, tên đường</label>

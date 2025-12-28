@@ -7,10 +7,12 @@ import HomePage from './pages/user/HomePage'
 import MyProductsPage from './pages/user/MyProductsPage'
 import AddProductPage from './pages/user/AddProductPage'
 import ProfilePage from './pages/user/ProfilePage'
+import ProductDetailPage from './pages/user/ProductDetailPage'
+import CartPage from './pages/user/CartPage'
 import AddCategoryPage from './pages/admin/AddCategoryPage'
 import CategoriesManagementPage from './pages/admin/CategoriesManagementPage'
-import { ProtectedRoute } from './components/ProtectedRoute'
-import Header from './components/Header'
+import { ProtectedRoute } from './components/common/ProtectedRoute'
+import Header from './components/common/Header'
 import './App.css'
 
 function App() {
@@ -78,6 +80,15 @@ function App() {
         />
         <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
+        <Route path="/products/:id" element={<ProductDetailPage />} />
+        <Route 
+          path="/cart" 
+          element={
+            <ProtectedRoute allowedRoles={['user']}>
+              <CartPage />
+            </ProtectedRoute>
+          } 
+        />
       </Routes>
     </Router>
   )

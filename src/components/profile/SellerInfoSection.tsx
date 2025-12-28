@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom'
 import './ProfileSection.css'
 import './SellerInfoSection.css'
-import AddressSelector from './AddressSelector'
-import type { SellerInfo, ShippingAddress } from '../models/Profile'
+import AddressSelector from '../address/AddressSelector'
+import ProvinceSelector from '../address/ProvinceSelector'
+import type { SellerInfo, ShippingAddress } from '../../models/Profile'
 
 interface SellerInfoSectionProps {
   sellerInfo: SellerInfo
@@ -49,17 +50,17 @@ const SellerInfoSection = ({
       </div>
 
       <div className="form-group">
-        <label htmlFor="tradingArea">
-          Khu vực giao dịch <span className="required">*</span>
-        </label>
-        <input
-          type="text"
-          id="tradingArea"
-          value={sellerInfo.tradingArea || ''}
-          onChange={(e) => onFieldChange('tradingArea', e.target.value)}
-          placeholder="VD: Hà Nội, TP.HCM, Toàn quốc"
+        <ProvinceSelector
+          value={sellerInfo.tradingArea}
+          onChange={(name) => onFieldChange('tradingArea', name)}
           disabled={saving}
+          required={true}
+          label="Khu vực giao dịch"
+          placeholder="-- Chọn Tỉnh/Thành phố --"
         />
+        <span className="field-hint">
+          Chọn tỉnh/thành phố nơi bạn muốn giao dịch. Bạn có thể chọn "Toàn quốc" nếu muốn giao dịch ở mọi nơi.
+        </span>
       </div>
 
       <div className="form-group">

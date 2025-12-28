@@ -1,8 +1,8 @@
 import { useProfileViewModel } from '../../viewmodels/useProfileViewModel'
-import ProfileProgress from '../../components/ProfileProgress'
-import ProfileBasicInfo from '../../components/ProfileBasicInfo'
-import AddressBookSection from '../../components/AddressBookSection'
-import SellerInfoSection from '../../components/SellerInfoSection'
+import ProfileProgress from '../../components/profile/ProfileProgress'
+import ProfileBasicInfo from '../../components/profile/ProfileBasicInfo'
+import AddressBookSection from '../../components/address/AddressBookSection'
+import SellerInfoSection from '../../components/profile/SellerInfoSection'
 import './ProfilePage.css'
 
 const ProfilePage = () => {

@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { productApi } from '../../services/api'
 import type { Product } from '../../models/Product'
 import './HomePage.css'
 
 const HomePage = () => {
+  const navigate = useNavigate()
   const [products, setProducts] = useState<Product[]>([])
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
@@ -99,7 +101,11 @@ const HomePage = () => {
         <>
           <div className="products-grid">
             {products.map((product) => (
-              <div key={product.id} className="product-card">
+              <div 
+                key={product.id} 
+                className="product-card"
+                onClick={() => navigate(`/products/${product.id}`)}
+              >
                 {product.images && product.images.length > 0 && (
                   <div className="product-image">
                     <img 
