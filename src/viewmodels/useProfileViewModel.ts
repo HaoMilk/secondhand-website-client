@@ -120,7 +120,8 @@ export function useProfileViewModel() {
       await profileApi.updateBasicInfo({
         fullName: formData.basicInfo.fullName!,
         phone: formData.basicInfo.phone!,
-        avatar: formData.basicInfo.avatar
+        avatar: formData.basicInfo.avatar,
+        address: formData.basicInfo.address
       })
       setSuccessMessage('Đã cập nhật thông tin cá nhân thành công')
       await loadProfile()

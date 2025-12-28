@@ -65,13 +65,8 @@ export const useLoginViewModel = (): LoginViewModel => {
         localStorage.setItem('role', response.role || 'user')
         localStorage.setItem('email', response.email || email)
         
-        // Redirect theo role
-        const role = response.role || 'user'
-        if (role === 'admin') {
-          navigate('/admin')
-        } else {
-          navigate('/user')
-        }
+        // Redirect đến trang chủ sau khi đăng nhập thành công
+        navigate('/')
       } else {
         setError(response.message || 'Đăng nhập thất bại')
       }
