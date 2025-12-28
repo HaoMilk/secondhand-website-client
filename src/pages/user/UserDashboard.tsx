@@ -2,16 +2,8 @@ import { useNavigate } from 'react-router-dom'
 import '../admin/Dashboard.css'
 
 const UserDashboard = () => {
-  const navigate = useNavigate()
   const email = localStorage.getItem('email') || 'User'
-  const role = localStorage.getItem('role') || 'user'
-
-  const handleLogout = () => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('role')
-    localStorage.removeItem('email')
-    navigate('/login')
-  }
+  const navigate = useNavigate()
 
   return (
     <div className="dashboard-container">
@@ -20,16 +12,29 @@ const UserDashboard = () => {
           <h1>Trang Người Dùng</h1>
           <p>Chào mừng, {email}</p>
         </div>
-        <button onClick={handleLogout} className="logout-button">
-          Đăng xuất
-        </button>
       </div>
 
       <div className="dashboard-content">
         <div className="dashboard-card">
           <h2>Sản phẩm của tôi</h2>
-          <p>Xem các sản phẩm bạn đã mua</p>
-          <button className="action-button">Xem sản phẩm</button>
+          <p>Quản lý sản phẩm bạn đang bán</p>
+          <button 
+            className="action-button"
+            onClick={() => navigate('/user/my-products')}
+          >
+            Quản lý sản phẩm
+          </button>
+        </div>
+
+        <div className="dashboard-card">
+          <h2>Đăng sản phẩm mới</h2>
+          <p>Thêm sản phẩm mới để bán</p>
+          <button 
+            className="action-button"
+            onClick={() => navigate('/user/add-product')}
+          >
+            Đăng sản phẩm
+          </button>
         </div>
 
         <div className="dashboard-card">
@@ -55,4 +60,3 @@ const UserDashboard = () => {
 }
 
 export default UserDashboard
-

@@ -2,16 +2,8 @@ import { useNavigate } from 'react-router-dom'
 import './Dashboard.css'
 
 const AdminDashboard = () => {
-  const navigate = useNavigate()
   const email = localStorage.getItem('email') || 'Admin'
-  const role = localStorage.getItem('role') || 'admin'
-
-  const handleLogout = () => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('role')
-    localStorage.removeItem('email')
-    navigate('/login')
-  }
+  const navigate = useNavigate()
 
   return (
     <div className="dashboard-container">
@@ -20,12 +12,20 @@ const AdminDashboard = () => {
           <h1>Trang Quản Trị</h1>
           <p>Chào mừng, {email}</p>
         </div>
-        <button onClick={handleLogout} className="logout-button">
-          Đăng xuất
-        </button>
       </div>
 
       <div className="dashboard-content">
+        <div className="dashboard-card">
+          <h2>Quản lý Danh mục</h2>
+          <p>Tạo và quản lý các danh mục sản phẩm</p>
+          <button 
+            className="action-button"
+            onClick={() => navigate('/admin/categories')}
+          >
+            Quản lý danh mục
+          </button>
+        </div>
+
         <div className="dashboard-card">
           <h2>Quản lý Người dùng</h2>
           <p>Xem và quản lý tất cả người dùng trong hệ thống</p>

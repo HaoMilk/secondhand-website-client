@@ -69,8 +69,6 @@ export const useLoginViewModel = (): LoginViewModel => {
         const role = response.role || 'user'
         if (role === 'admin') {
           navigate('/admin')
-        } else if (role === 'seller') {
-          navigate('/seller')
         } else {
           navigate('/user')
         }

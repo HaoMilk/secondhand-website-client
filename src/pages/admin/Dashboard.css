@@ -8,7 +8,7 @@
   max-width: 1200px;
   margin: 0 auto 30px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   background: #FFFFFF;
   padding: 20px 30px;
@@ -109,8 +109,6 @@
 /* Responsive */
 @media (max-width: 768px) {
   .dashboard-header {
-    flex-direction: column;
-    gap: 15px;
     text-align: center;
   }
 

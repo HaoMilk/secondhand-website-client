@@ -11,7 +11,7 @@ export interface RegisterCredentials {
   confirmPassword: string
 }
 
-export type UserRole = 'admin' | 'user' | 'seller'
+export type UserRole = 'admin' | 'user'
 
 export interface AuthResponse {
   token?: string
